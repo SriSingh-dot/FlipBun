@@ -14,7 +14,7 @@
     align-items:center;
     background:#b9996e;
     font-family:Arial, sans-serif;
-      
+    
     }
     .box{
     border:3px solid #4d260f;
@@ -49,17 +49,21 @@
 .side-img{
   width:170px;   
 }
-.page-frame{
-  width:95vw;
-  height:95vh;
-  border:4px solid #4d260f;     
-  outline:4px solid #2f1708;     
-  outline-offset: 8px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:20px;
+.snowflake{
+  position:fixed;
+  top:-10px;
+  pointer-events:none;
+  z-index: 1000;
+  user-select:none;
+  animation: fall 12s linear infinite;
 }
+
+@keyframes fall{
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+
 
   </style>
 </head>
@@ -81,9 +85,21 @@
         <a href="game.html">Start</a>
       </div>
     </div>
-
   </div>
 </body>
-
-
+<script>
+  const snowCount = 50;
+  for(let i = 0; i < snowCount; i++){
+    const snow = document.createElement('div');
+    snow.classList.add('snowflake');
+    const img = document.createElement('img');
+    img.src = 'rain.png';      
+    img.style.width = (Math.random() * 10 + 10) + 'px';  
+    img.style.height = 'auto';
+    snow.appendChild(img);
+    snow.style.left = Math.random() * 100 + 'vw';
+    snow.style.animationDelay = Math.random() * 10 + 's';
+    document.body.appendChild(snow);
+  }
+</script><!--i do not know why the png looks like they are stuck to the wall-->
 </html>
