@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How to Play — FlipBun</title>
+  <link rel="icon" type="image/png" href="FlipBun.png">
   <style>
     body{
     margin:0;
@@ -13,6 +14,7 @@
     align-items:center;
     background:#b9996e;
     font-family:Arial, sans-serif;
+      
     }
     .box{
     border:3px solid #4d260f;
@@ -39,21 +41,49 @@
     padding:8px 18px;
     border-radius:20px;
     }
+    .wrapper{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.side-img{
+  width:170px;   
+}
+.page-frame{
+  width:95vw;
+  height:95vh;
+  border:4px solid #4d260f;     
+  outline:4px solid #2f1708;     
+  outline-offset: 8px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:20px;
+}
+
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>How to Play</h1>
-    <hr>
-    <ol>
-      <li>Click any card displayed to flip it over.</li>
-      <li>Try to find a matching pair the same card.</li>
-      <li>If the cards match, they stay open and does not close.</li>
-      <li>If not, they flip back (You have to remeber their position).</li>
-      <li>Match all pairs to win</li>
-    </ol>
-    <a href="index.html">Back</a>
-    <a href="game.html">Start</a>
+  <div class="page-frame">
+    <div class="wrapper">
+      <img src="b1.png" class="side-img" alt="Bunny">
+      <div class="box">
+        <h1>How to Play</h1>
+        <hr>
+        <ol>
+          <li>Click any card displayed to flip it over.</li>
+          <li>Try to find a matching pair the same card.</li>
+          <li>If the cards match, they stay open and does not close.</li>
+          <li>If not, they flip back (You have to remember their position).</li>
+          <li>Match all pairs to win!!</li>
+        </ol>
+        <a href="index.html">Back</a>
+        <a href="game.html">Start</a>
+      </div>
+    </div>
+
   </div>
 </body>
+
+
 </html>

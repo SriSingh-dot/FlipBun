@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FlipBun</title>
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="FlipBun.png">
   <style>
     body{
       position:relative;
@@ -14,6 +15,8 @@
       display:flex;
       justify-content:center;
       align-items:center;
+      border:2px solid #2c1609;
+      border-radius:30px;
     }
 
     .card{
@@ -23,28 +26,51 @@
       padding:40px 60px;
       
       border-radius:28px;
-      background:rgba(231, 216, 216, 0.08);
+      background:rgba(255,255,255,0.08);
     }
 
     h1{
       margin:0 0 12px 0;
       font-family:'Allura', cursive;
       font-size:164px;
-      color:#f107a3;
+      color:#7a4a2d;
       letter-spacing:1px;
+    }
+    a{
+    display:inline-block;
+    margin-top:15px;
+    text-decoration:none;
+    color:#503c18;
+    border:2px solid #503c18;
+    padding:8px 18px;
+    border-radius:20px;
+    }
+    .hack-flag{
+      position:fixed;
+      top:0;
+      left:70px;
+      width:240px;
+      height:auto;
+    }
+    hr {
+      border: none;
+      height: 2px;
+      background-color: #5f3318;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
   <div class="card bordered">
     <h1>FlipBun</h1>
-    <hr class="divider">
-    
-    <div class="btn-group">
-      <button>play</button>
-      <button>How to Play</button>
+    <hr>
+    <BR>
+      <a href="game.html">Play</a>
+      <a href="how.html">How to Play</a>
+      
     </div>
   </div>
   <img src="hackclubflag.svg" class="hack-flag" alt="Hack Club flag" />
 </body>
 </html>
+
