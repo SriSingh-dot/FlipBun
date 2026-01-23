@@ -4,41 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FlipBun — Level 1</title>
+<link rel="icon" type="image/png" href="FlipBun.png">
 <style>
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  background:#b9996e;
-  font-family:Arial, sans-serif;  // ayein? no comment?;
-}
-h1{
-margin-top:20px;
-color:#4d260f;
-}
+body{margin:0;height:100vh;display:flex;flex-direction:column;align-items:center;background:url("j1.jpg") center/cover no-repeat;font-family:Arial,sans-serif;box-sizing:border-box;border:12px double #4d260f;position:relative;padding:18px;}
+body::before{content:"";position:fixed;inset:12px;border:6px double #4d260f;border-radius:30px;pointer-events:none;z-index:10;}
+body::after{content:"";position:fixed;inset:24px;border:3px dotted #4d260f;border-radius:24px;pointer-events:none;z-index:10;}
+h1{margin-top:20px;color:#4d260f;background:rgba(255,255,255,0.7);padding:10px 25px;border-radius:20px;border:4px solid #4d260f;}
+#top{margin-top:10px;background:rgba(255,255,255,0.7);padding:10px 20px;border-radius:15px;color:#4d260f;font-size:18px;border:4px solid #4d260f;}
+#game{margin-top:40px;display:grid;grid-template-columns:repeat(4,130px);gap:20px;padding:20px;border:6px solid #4d260f;border-radius:30px;background:rgba(255,255,255,0.4);}
+.card{width:130px;height:120px;border-radius:18px;background:#aa814c;border:4px solid #4d260f;cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.card img{width:70%;height:70%;object-fit:contain;}
+.card.back img{width:70%;height:70%;object-fit:contain;}
+</style>
 </head>
 <body>
-
 <h1>Easy Mode</h1>
-
-<div>
-  Flips left: <span id="flips">20</span>
-</div>
-
-
-<div>
-  <img src="flip1.png">
-  <img src="flip2.png">
-  <img src="flip3.png">
-  <img src="flip4.png">
-  <img src="flip5.png">
-  <img src="flip6.png">
-  <img src="flip7.png">
-  <img src="flip8.png">
-  <img src="flip9.png">
-</div>
-</body>
+<div id="top">Flips left: <span id="flips">20</span></div>
+<div id="game"></div>
 <script>
-  
+const back = "card.png";
+const images = ["flip1.png", "flip2.png", "flip3.png", "flip4.png"];
+let cards = images.concat(images);
+let flips = 20;
+let first = null;
+let second = null;
+let lock = false;
+
+document.getElementById("flips").textContent = flips;
+
+cards.sort(function() { return Math.random() - 0.5; });
+
+const game = document.getElementById("game");
+
+cards.forEach(function(img) {
+  const card = document.createElement("div");
+  card.className = "card back";
+  card.innerHTML = '<img src="' + back + '">';
+  card.dataset.img = img;
+  game.appendChild(card);
+
+  card.onclick = function() {
+	if (lock) return;
+	if (card === first) return;
+	if (card.classList.contains("matched")) return;
+	if (flips <= 0) return;
+
+	card.classList.remove("back");
+	card.firstChild.src = img;
+
+	if (!first) {
+	  first = card;
+	  return;
+	}
+
+	second = card;
+	lock = true;
+	flips--;
+	document.getElementById("flips").textContent = flips;
+
+	if (first.dataset.img === second.dataset.img) {
+	  first.classList.add("matched");
+	  second.classList.add("matched");
+	  reset();
+	} else {
+	  setTimeout(function() {
+		first.classList.add("back");
+		second.classList.add("back");
+		first.firstChild.src = back;
+		second.firstChild.src = back;
+		reset();
+	  }, 700);
+	}
+  };
+});
+
+function reset() {
+  first = null;
+  second = null;
+  lock = false;
+}
+</script>
+</body>
+</html>
