@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlipBun — Level 3</title>
+</head>
+
+<body>
+
+<h1>Final Level</h1>
+
+<div id="timer-container">⏳ <span id="timer">1:00</span></div>
+<div id="top">Shuffle on 3 fails</div>
+
+<div id="game"></div>
+
+<script>
+const back = "card.png";
+const images = ["flip1.png","flip2.png","flip3.png","flip4.png","flip5.png","flip6.png"];
+let cards = images.concat(images);
+
+let first=null, second=null, lock=false;
+let failCount = 0;
+
+const game = document.getElementById("game");
+
+function shuffle(){
+  cards.sort(()=>Math.random()-0.5);
+  game.innerHTML="";
+  createBoard();
+}
+
+function createBoard(){
+  cards.forEach(img=>{
+    const card=document.createElement("div");
+    card.className="card";
+    const imgEl=document.createElement("img");
+    imgEl.src=back;
+    card.appendChild(imgEl);
+    card.dataset.img=img;
+    game.appendChild(card);
+
+    card.onclick=()=>{

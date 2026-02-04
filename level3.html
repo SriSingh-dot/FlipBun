@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlipBun — Level 3 Rules</title>
+<link rel="icon" type="image/png" href="FlipBun.png">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url("j1.jpg") center/cover no-repeat;
+  font-family:Arial, sans-serif;
+  box-sizing:border-box;
+  border:12px double #4d260f;
+  padding:18px;
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:12px;
+  border:6px double #4d260f;
+  border-radius:30px;
+  pointer-events:none;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:24px;
+  border:3px dotted #4d260f;
+  border-radius:24px;
+  pointer-events:none;
+}
+
+.rules-box{
+  background:rgba(218, 173, 106, 0.5);
+  border:6px solid #4d260f;
+  border-radius:25px;
+  padding:40px 50px;
+  max-width:700px;
+  text-align:center;
+  box-shadow:0 0 30px rgba(0,0,0,.5);
+}
+
+.rules-box h1{
+  color:#4d260f;
+  margin-bottom:25px;
+  border:4px solid #4d260f;
+  border-radius:18px;
+  padding:10px 25px;
+  background:#a17a4c;
+}
+
+.rules-box ol{
+  text-align:left;
+  color:#4d260f;
+  font-size:18px;
+  line-height:1.7;
+  margin-bottom:30px;
+}
+
+.start-btn{
+  display:inline-block;
+  background:#4d260f;
+  color:white;
+  text-decoration:none;
+  padding:12px 32px;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:bold;
+  border:3px solid #3a1d0a;
+}
+
+.start-btn:hover{
+  background:#3a1d0a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="rules-box">
+  <h1>Level 3</h1>
+
+  <ol>
+    <li>The patten of the game is same as other levels — match the pairs.</li>
+    <li>There is a twist. If you fail to match a pair 3 times, all cards will shuffle.</li>
+    <li>This is the last level. You will only have 1 minute to successfully match all pairs.</li>
+    <li>Win the game.</li>
+  </ol>
+
+  <a href="next.html" class="start-btn">Start</a>
+</div>
+
+</body>
+</html>
