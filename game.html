@@ -19,6 +19,75 @@ h1{margin-top:20px;color:#4d260f;background:rgba(255,255,255,0.7);padding:10px 2
   align-items: center;
   gap: 6px;
 }
+#retry-btn{
+  background:#4d260f;
+  color:white;
+  border:none;
+  padding:10px 26px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+#retry-btn:hover{
+  background:#3a1d0a;
+}
+
+.next-btn{
+  display:inline-block;
+  background:#4d260f;
+  color:#fff;
+  text-decoration:none;
+  padding:10px 28px;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:bold;
+}
+.next-btn:hover{
+  background:#3a1d0a;
+}
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.popup.hidden{display:none;}
+
+.popup-box{
+  background:#c29a6b;
+  border:6px double #4d260f;
+  padding:30px;
+  border-radius:24px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,.6);
+  animation:pop .3s ease;
+}
+
+.popup-box img{width:180px;margin-bottom:15px;}
+
+.popup-box h2{
+  color:#4d260f;
+  margin-bottom:15px;
+  font-size:28px;
+}
+
+.popup-box button{
+  background:#4d260f;
+  color:#fff;
+  border:none;
+  padding:10px 26px;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+.popup-box button:hover{background:#3a1d0a;}
+@keyframes pop{
+  from{transform:scale(.7);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
 </style>
 </head>
 <body>
@@ -37,12 +106,9 @@ let flips = 12;
 let first = null;
 let second = null;
 let lock = false;
-
 document.getElementById("flips").textContent = flips;
 cards.sort(() => Math.random() - 0.5);
-
 const game = document.getElementById("game");
-
 cards.forEach(img => {
   const card = document.createElement("div");
   card.className = "card back";
@@ -50,19 +116,15 @@ cards.forEach(img => {
   const imgEl = document.createElement("img");
   imgEl.src = back;
   card.appendChild(imgEl);
-
   card.dataset.img = img;
   game.appendChild(card);
-
   card.onclick = () => {
     if (lock) return;
     if (card === first) return;
     if (card.classList.contains("matched")) return;
     if (flips <= 0) return;
-
     card.classList.remove("back");
     card.firstChild.src = img;
-
     if (!first) {
       first = card;
       return;
@@ -75,58 +137,79 @@ cards.forEach(img => {
 
     if (flips === 0) clearInterval(timerInterval);
 
-    if (first.dataset.img === second.dataset.img) {
-      first.classList.add("matched");
-      second.classList.add("matched");
-      checkGameOver();
-      reset();
-    } else {
+   if (first.dataset.img === second.dataset.img) {
+  first.classList.add("matched");
+  second.classList.add("matched");
+
+  setTimeout(() => {
+    reset();         
+    checkGameOver();  
+  }, 300);
+}
+
+ else {
       setTimeout(() => {
-        first.classList.add("back");
-        second.classList.add("back");
-        first.firstChild.src = back;
-        second.firstChild.src = back;
-        reset();
+      first.classList.add("back");
+      second.classList.add("back");
+      first.firstChild.src = back;
+      second.firstChild.src = back;
+      reset();
       }, 700);
     }
   };
 });
-
 function reset() {
   first = null;
   second = null;
   lock = false;
 }
-
 let timeLeft = 45;
-document.getElementById("timer").textContent = "0:45";
-
 let timerInterval = setInterval(updateTimer, 1000);
-
+updateTimer();
 function updateTimer() {
   if (timeLeft <= 0) {
     clearInterval(timerInterval);
     document.getElementById("timer").textContent = "0:00";
-    return;
-  }
-
+    showFail();
+    return;}
   timeLeft--;
-
   let mins = Math.floor(timeLeft / 60);
   let secs = timeLeft % 60;
   document.getElementById("timer").textContent =
-    `${mins}:${secs < 10 ? '0' + secs : secs}`;
+    `${mins}:${secs < 10 ? '0' + secs : secs}`;}
+function showWin(){
+  document.getElementById("popup-img").src = "win.png";
+  document.getElementById("popup-text").textContent = "You Win!";
+  document.querySelector(".next-btn").style.display = "inline-block";
+  document.getElementById("retry-btn").style.display = "none";
+  document.getElementById("popup").classList.remove("hidden");
 }
 
+function showFail(){
+  document.getElementById("popup-img").src = "fail.png";
+  document.getElementById("popup-text").textContent = "Game Over!";
+  document.querySelector(".next-btn").style.display = "none";
+  document.getElementById("retry-btn").style.display = "inline-block";
+  document.getElementById("popup").classList.remove("hidden");
+}
 function checkGameOver() {
   const matched = document.querySelectorAll(".matched").length;
   if (matched === cards.length) {
     clearInterval(timerInterval);
+    showWin();
   }
 }
-</script>
 
+</script>
+<div id="popup" class="popup hidden">
+  <div class="popup-box">
+    <img id="popup-img" src="" />
+    <h2 id="popup-text"></h2>
+    <a href="level2.html" class="next-btn">Next</a>
+<button id="retry-btn" onclick="location.reload()">Play Again</button>
+  </div>
+</div>
 </body>
-</html><!--left to add:-
-a winning pop up
-loosing pop up-->
+</html>
+
+  
