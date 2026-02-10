@@ -200,7 +200,11 @@ cards.forEach(img => {
     lock = true;
     flips--;
     document.getElementById("flips").textContent = flips;
-    if(flips === 0) clearInterval(timerInterval);
+   if (flips === 0) {
+  clearInterval(timerInterval);
+  showFail();
+}
+
     if(first.dataset.img === second.dataset.img){
       first.classList.add("matched");
       second.classList.add("matched");

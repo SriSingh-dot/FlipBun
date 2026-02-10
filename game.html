@@ -136,7 +136,11 @@ cards.forEach(img => {
     flips--;
     document.getElementById("flips").textContent = flips;
 
-    if (flips === 0) clearInterval(timerInterval);
+   if (flips === 0) {
+  clearInterval(timerInterval);
+  showFail();
+}
+
 
    if (first.dataset.img === second.dataset.img) {
   first.classList.add("matched");
@@ -209,6 +213,8 @@ function checkGameOver() {
     <a href="level2.html" class="next-btn">Next</a>
 <button id="retry-btn" onclick="location.reload()">Play Again</button>
   </div>
+</div>
+
 </div>
 </body>
 </html>
